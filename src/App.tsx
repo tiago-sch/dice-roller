@@ -1,13 +1,14 @@
-import ThemeSelector from './components/ThemeSelector'
+import Navbar from './components/Navbar'
+import DiceRollsProvider from './contexts/DiceRolls/DiceRollsProvider'
 import './App.css'
 
 function App() {
   return (
     <>
-      <div className="text-center">
-        <h1 className="text-5xl">Dice Roller</h1>
-        <ThemeSelector />
-      </div>
+      <Navbar />
+      <DiceRollsProvider>
+        <div></div>
+      </DiceRollsProvider>
     </>
   )
 }

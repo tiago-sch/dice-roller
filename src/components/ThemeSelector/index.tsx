@@ -1,4 +1,5 @@
-import { useEffect, useCallback, useState, type ChangeEvent } from 'react'
+import { useEffect, useCallback, type ChangeEvent } from 'react'
+import useLocalStorage from '../../utils/useLocalStorage'
 
 const THEMES = [
   "light",
@@ -39,14 +40,13 @@ const THEMES = [
 ]
 
 const ThemeSelector = () => {
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || THEMES[1])
+  const [theme, setTheme] = useLocalStorage('theme', THEMES[1])
 
   useEffect(() => {
     const doc = document.querySelector('html');
     if (doc) {
       doc.dataset.theme = theme
     }
-    localStorage.setItem('theme', theme);
   }, [theme]);
 
   const onChange = useCallback(
@@ -55,9 +55,9 @@ const ThemeSelector = () => {
   )
 
   return (
-    <select defaultValue={theme} className="select" onChange={onChange}>
+    <select value={theme} className="select" onChange={onChange}>
       {THEMES.map(item => (
-        <option key={`theme-${item}-option`} selected={theme === item} value={item}>
+        <option key={`theme-${item}-option`} value={item}>
           {item.toLocaleUpperCase()}
         </option>
       ))}
