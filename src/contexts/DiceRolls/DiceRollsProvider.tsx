@@ -18,10 +18,12 @@ const DiceRollsProvider = ({ children }: { children: React.ReactNode }) => {
     return rolled;
   }, [rolls, setRolls]);
 
-
+  const clearRolls = useCallback(() => {
+    setRolls([])
+  }, [setRolls])
 
   return (
-    <DiceRollsContext.Provider value={{ rolls, roll, currentRoll }}>
+    <DiceRollsContext.Provider value={{ rolls, roll, currentRoll, clearRolls }}>
       {children}
     </DiceRollsContext.Provider>
   );

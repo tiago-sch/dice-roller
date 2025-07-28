@@ -9,6 +9,8 @@ export type RolledValue = {
 
 export type RolledResult =  {
   rolled: number,
+  prompt: string,
+  date: Date,
   rolledValues: RolledValue[],
   modifiers: number[]
 };

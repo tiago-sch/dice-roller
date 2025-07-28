@@ -15,12 +15,15 @@ const rollDice: RollDiceHelper = (sides) => Math.floor(Math.random() * sides) + 
 const getRollValue: GetRollValueHelper = (value) => {
   let rolled = 0;
   const rolledValues: RolledValue[] = [];
+  const today = new Date();
 
   if (value.match(onlyStraightValue)) {
     return {
       rolled: parseFloat(value),
       rolledValues,
       modifiers: [],
+      prompt: value,
+      date: today,
     }
   }
 
@@ -66,6 +69,8 @@ const getRollValue: GetRollValueHelper = (value) => {
     rolled,
     rolledValues,
     modifiers,
+    prompt: value,
+    date: today,
   };
 };
 
