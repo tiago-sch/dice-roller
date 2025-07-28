@@ -6,7 +6,8 @@ type UseLocalStorage = <T>(key: string, defaultValue: T) => [T, UseLocalStorageS
 
 const useLocalStorage: UseLocalStorage = (key, defaultValue) => {
   const [value, setValue] = useState(() => {
-    const firstValue = isObject(defaultValue) ? JSON.parse(localStorage.getItem(key) || '') : localStorage.getItem(key)
+    const localData = localStorage.getItem(key);
+    const firstValue = isObject(defaultValue) && localData ? JSON.parse(localStorage.getItem(key) || '') : localStorage.getItem(key)
     return firstValue || defaultValue;
   });
 

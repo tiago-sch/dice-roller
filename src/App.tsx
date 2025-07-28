@@ -1,4 +1,5 @@
 import Navbar from './components/Navbar'
+import RollInput from './components/RollInput'
 import DiceRollsProvider from './contexts/DiceRolls/DiceRollsProvider'
 import './App.css'
 
@@ -7,7 +8,7 @@ function App() {
     <>
       <Navbar />
       <DiceRollsProvider>
-        <div></div>
+        <RollInput />
       </DiceRollsProvider>
     </>
   )
