@@ -52,7 +52,7 @@ const HistoryDrawer = () => {
             </li>
           ) : (
             <li className="text-center text-lg flex-1 justify-center h-full">
-              Your future rolls you show up here
+              Your future rolls will show up here
             </li>
           )}
         </ul>
