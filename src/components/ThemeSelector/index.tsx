@@ -5,48 +5,29 @@ const THEMES = [
   "light",
   "dark",
   "cupcake",
-  "bumblebee",
   "emerald",
-  "corporate",
-  "synthwave",
   "retro",
   "cyberpunk",
-  "valentine",
   "halloween",
-  "garden",
   "forest",
   "aqua",
-  "lofi",
   "pastel",
   "fantasy",
-  "wireframe",
-  "black",
   "luxury",
   "dracula",
-  "cmyk",
   "autumn",
-  "business",
-  "acid",
   "lemonade",
   "night",
   "coffee",
-  "winter",
-  "dim",
   "nord",
-  "sunset",
-  "caramellatte",
-  "abyss",
-  "silk",
 ]
 
 const ThemeSelector = () => {
   const [theme, setTheme] = useLocalStorage('theme', THEMES[1])
 
   useEffect(() => {
-    const doc = document.querySelector('html');
-    if (doc) {
-      doc.dataset.theme = theme
-    }
+    const doc = document.documentElement;
+    doc.dataset.theme = theme
   }, [theme]);
 
   const onChange = useCallback(
@@ -55,9 +36,9 @@ const ThemeSelector = () => {
   )
 
   return (
-    <select value={theme} className="select" onChange={onChange}>
+    <select value={theme} className="select" data-testid="theme-selector" onChange={onChange}>
       {THEMES.map(item => (
-        <option key={`theme-${item}-option`} value={item}>
+        <option key={`theme-${item}-option`} data-testid={`theme-${item}-option`} value={item}>
           {item.toLocaleUpperCase()}
         </option>
       ))}

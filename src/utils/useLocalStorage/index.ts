@@ -24,9 +24,9 @@ const useLocalStorage: UseLocalStorage = (key, defaultValue) => {
   useEffect(() => {
     const handleStorageChange = () => {
       const newValue = localStorage.getItem(key);
-      const formattedValue = isObject(value) ? JSON.stringify(newValue) : newValue
+      const formattedValue = isObject(value) && newValue ? JSON.parse(newValue) : newValue
       if (!isEqual(formattedValue, value)) {
-        setValue(newValue);
+        setValue(formattedValue);
       }
     };
 

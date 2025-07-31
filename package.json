@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
+    "@testing-library/user-event": "^14.6.1",
     "daisyui": "^5.0.47",
     "date-fns": "^4.1.0",
     "lodash": "^4.17.21",

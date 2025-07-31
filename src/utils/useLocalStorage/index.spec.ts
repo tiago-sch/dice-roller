@@ -121,4 +121,25 @@ describe('useLocalStorage', () => {
     expect(result.current[0]).toBe(defaultValue);
     expect(localStorage.getItem('test')).toBe(defaultValue);
   })
+
+  it('should update local value through event effect with object like value', () => {
+    const defaultValue = { a: 'testvalue' };
+    
+    const { result, rerender } = renderHook(() => useLocalStorage('test', defaultValue));
+    
+    expect(result.current[0]).toStrictEqual(defaultValue);
+    expect(localStorage.getItem('test')).toBe(JSON.stringify(defaultValue));
+    
+    const localStorageValue = { a: 'localstoragevalue' };
+    localStorage.setItem('test', JSON.stringify(localStorageValue));
+
+    act(() => {
+      window.dispatchEvent(new Event('storage'));
+    });
+    
+    rerender()
+
+    expect(result.current[0]).toStrictEqual(localStorageValue);
+    expect(localStorage.getItem('test')).toBe(JSON.stringify(localStorageValue));
+  })
 });
