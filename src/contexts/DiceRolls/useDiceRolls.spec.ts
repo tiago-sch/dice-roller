@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react'
+import { act, renderHook } from '@testing-library/react'
 import { afterEach, expect, describe, it } from 'vitest'
 import useDiceRolls from './useDiceRolls'
 import DiceRollsProvider from './DiceRollsProvider'
@@ -20,7 +20,7 @@ describe('useDiceRolls', () => {
 
   });
 
-  it('should render without breaking', () => {
+  it('should render with provider without breaking', () => {
     const { result } = renderHook(
       () => useDiceRolls(),
       { wrapper: DiceRollsProvider }
@@ -41,7 +41,9 @@ describe('useDiceRolls', () => {
     expect(result.current.rolls).toHaveLength(0);
     expect(result.current.currentRoll).toBeUndefined();
 
-    result.current.roll('d20');
+    act(() => {
+      result.current.roll('d20');
+    });
     rerender();
 
     expect(result.current.currentRoll).toBeDefined();
@@ -50,7 +52,7 @@ describe('useDiceRolls', () => {
     expect(result.current.rolls[0]).toStrictEqual(currentRoll);
   });
 
-  it('should roll dice and clear', () => {
+  it('should roll dice and clear', async () => {
     const { result, rerender } = renderHook(
       () => useDiceRolls(),
       { wrapper: DiceRollsProvider }
@@ -59,7 +61,9 @@ describe('useDiceRolls', () => {
     expect(result.current.rolls).toHaveLength(0);
     expect(result.current.currentRoll).toBeUndefined();
 
-    result.current.roll('d20');
+    act(() => {
+      result.current.roll('d20');
+    });
     rerender();
 
     expect(result.current.currentRoll).toBeDefined();
@@ -67,7 +71,9 @@ describe('useDiceRolls', () => {
     expect(result.current.rolls).toHaveLength(1);
     expect(result.current.rolls[0]).toStrictEqual(currentRoll);
 
-    result.current.clearRolls();
+    act(() => {
+      result.current.clearRolls();
+    });
     rerender();
 
     expect(result.current.currentRoll).toBeUndefined();

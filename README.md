@@ -20,13 +20,21 @@ npm run dev
 
 ## Tests
 
-Some parts of the project are covered with tests. To run the tests:
+Some parts of the project are covered with tests.
+
+### Tests Setup
+
+```bash
+npx playwright install
+```
+
+### Run Tests
 
 ```bash
 npm run test
 ```
 
-If you wish to see the code coverage, run the folowing:
+### Run Tests with code coverage
 
 ```bash
 npm run test:coverage

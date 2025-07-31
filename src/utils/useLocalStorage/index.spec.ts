@@ -1,5 +1,5 @@
 import { afterEach, describe, it, expect } from 'vitest'
-import { renderHook } from '@testing-library/react'
+import { act, renderHook } from '@testing-library/react'
 import useLocalStorage from '.'
 
 describe('useLocalStorage', () => {
@@ -54,7 +54,10 @@ describe('useLocalStorage', () => {
     expect(localStorage.getItem('test')).toBe(defaultValue);
     
     const localStorageValue = 'localstoragevalue';
-    result.current[1](localStorageValue);
+
+    act(() => {
+      result.current[1](localStorageValue);
+    });
 
     rerender()
 
@@ -71,7 +74,10 @@ describe('useLocalStorage', () => {
     expect(localStorage.getItem('test')).toBe(JSON.stringify(defaultValue));
     
     const localStorageValue = { a: 'localstoragevalue' };
-    result.current[1](localStorageValue);
+    
+    act(() => {
+      result.current[1](localStorageValue);
+    });
 
     rerender()
 
@@ -90,7 +96,10 @@ describe('useLocalStorage', () => {
     const localStorageValue = 'localstoragevalue';
     localStorage.setItem('test', localStorageValue);
 
-    window.dispatchEvent(new Event('storage'));
+    act(() => {
+      window.dispatchEvent(new Event('storage'));
+    });
+    
     rerender()
 
     expect(result.current[0]).toBe(localStorageValue);

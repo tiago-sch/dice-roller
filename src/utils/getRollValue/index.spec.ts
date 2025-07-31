@@ -64,7 +64,7 @@ describe('getRollValue', () => {
   test('should return multiple rolled dice value', { repeats: 10 }, () => {
     const result = getRollValue('2d20-d6');
 
-    expect(result.rolled).toBeGreaterThanOrEqual(0);
+    expect(result.rolled).toBeGreaterThanOrEqual(-5);
     expect(result.rolled).toBeLessThanOrEqual(40-1);
     expect(result.rolledValues).toHaveLength(3);
   });
