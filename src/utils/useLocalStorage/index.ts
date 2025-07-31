@@ -1,13 +1,17 @@
 import { useCallback, useEffect, useState } from 'react'
 import { isEqual, isObject } from 'lodash'
-
-type UseLocalStorageSetter<T> = (newValue: T) => void;
-type UseLocalStorage = <T>(key: string, defaultValue: T) => [T, UseLocalStorageSetter<T>];
+import type { UseLocalStorageSetter, UseLocalStorage } from './types'
 
 const useLocalStorage: UseLocalStorage = (key, defaultValue) => {
   const [value, setValue] = useState(() => {
     const localData = localStorage.getItem(key);
-    const firstValue = isObject(defaultValue) && localData ? JSON.parse(localStorage.getItem(key) || '') : localStorage.getItem(key)
+    const firstValue = isObject(defaultValue) && localData ? JSON.parse(localData) : localData;
+
+    if (!firstValue) {
+      const defaultFormatted = isObject(defaultValue) ? JSON.stringify(defaultValue) : defaultValue;
+      localStorage.setItem(key, defaultFormatted as string);
+    }
+
     return firstValue || defaultValue;
   });
 

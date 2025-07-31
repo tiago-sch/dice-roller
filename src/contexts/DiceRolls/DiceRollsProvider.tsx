@@ -14,12 +14,13 @@ const DiceRollsProvider = ({ children }: { children: React.ReactNode }) => {
     setCurrentRoll(rolled);
     const newRolls = cloneDeep(rolls);
     newRolls.push(rolled);
-    setRolls(newRolls)
+    setRolls(newRolls);
     return rolled;
   }, [rolls, setRolls]);
 
   const clearRolls = useCallback(() => {
-    setRolls([])
+    setRolls([]);
+    setCurrentRoll(undefined);
   }, [setRolls])
 
   return (

@@ -45,14 +45,14 @@ const getRollValue: GetRollValueHelper = (value) => {
     let diceArray: string[] = [];
 
     forEach(allDice, die => {
-      const dice = die.match(diceRegex)?.[0] || 'd20';
+      const dice = die.match(diceRegex)![0];
       const numOfDice = parseFloat(die.replace(dice, '')) || 1;
       const newDiceArray = Array.from(Array(numOfDice).keys()).map(() => dice);
       diceArray = concat(diceArray, newDiceArray);
     });
 
     forEach(diceArray, die => {
-      const diceSides = parseFloat(die.match(diceRegex)?.[0].replace(diceCountRegex, '') || '20');
+      const diceSides = parseFloat(die.match(diceRegex)![0].replace(diceCountRegex, ''));
       const rolledValue = rollDice(diceSides);
       const isNegative = die.charAt(0) === '-';
       rolledValues.push({
