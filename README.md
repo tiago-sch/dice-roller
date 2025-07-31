@@ -22,12 +22,6 @@ npm run dev
 
 Some parts of the project are covered with tests.
 
-### Tests Setup
-
-```bash
-npx playwright install
-```
-
 ### Run Tests
 
 ```bash
