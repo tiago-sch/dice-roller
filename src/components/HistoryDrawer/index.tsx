@@ -16,9 +16,10 @@ const HistoryDrawer = () => {
         <ul className="bg-base-200 text-base-content min-h-full w-80 p-4 flex gap-4 flex-col-reverse">
           {rolls.map((diceRoll, index) => {
             const filteredModifiers = diceRoll.modifiers.filter(Boolean);
+            const key = `${index}-${diceRoll.rolled}-${diceRoll.date.toString()}`;
 
             return (
-              <li key={`${index}-${diceRoll.rolled}`}>
+              <li key={`${index}-${diceRoll.rolled}`} data-testid="rollie-result">
                 <div className="stats border border-base-300 shadow hover:shadow-2xl w-full">
                   <div className="stat max-w-72">
                     <div className="stat-title">{format(diceRoll.date, 'dd/MM/yyyy hh:mm (z)')}</div>
@@ -33,7 +34,7 @@ const HistoryDrawer = () => {
                           const showFinalComma = !isLast || (isLast && !!filteredModifiers.length);
                           
                           return (
-                            <Fragment key={`rollie-${rolled.die}-${index}`}>
+                            <Fragment key={`${key}-rollie-${rolled.die}-${index}-${i}`}>
                               <b>{rolled.die}</b>{' '}
                               (<span className={rolled.crit ? 'text-green-500' : rolled.fudge ? 'text-red-500' : ''} >
                                 {rolled.rolledValue}

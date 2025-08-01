@@ -9,6 +9,9 @@ const RollInput = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    /** 'else' ignored as input will be present on render */
+    /* istanbul ignore else @preserve */
     if (inputRef.current) {
       const value = inputRef.current.value;
       inputRef.current.value = "";
@@ -22,7 +25,7 @@ const RollInput = () => {
         <div className="px-8 max-w-150">
           <p>
             {currentRoll ? (
-              <span className="text-6xl bg-secondary py-4 px-16 inline-block rounded-lg block font-bold">
+              <span className="text-6xl bg-secondary py-4 px-16 inline-block rounded-lg block font-bold" data-testid="roll-input-result">
                 {currentRoll?.rolled}
               </span>
             ) : (
@@ -32,7 +35,7 @@ const RollInput = () => {
             )}
 
             {currentRoll?.rolledValues && (
-              <small className="block text-lg mt-5">
+              <small className="block text-lg mt-5" data-testid="roll-input-result-details">
                 {currentRoll.rolledValues.map((rolled, i) => {
                   const isLast = i+1 === currentRoll.rolledValues.length;
                   const showFinalComma = !isLast || (isLast && !!filteredModifiers?.length);
@@ -53,8 +56,8 @@ const RollInput = () => {
           </p>
         </div>
       </div>
-      <form onSubmit={onSubmit} className='text-center'>
-        <input className="input input-xl" autoFocus placeholder="e.g.: 2d20+4" ref={inputRef} />
+      <form onSubmit={onSubmit} className="text-center" data-testid="roll-input-form">
+        <input className="input input-xl" autoFocus placeholder="e.g.: 2d20+4" ref={inputRef} data-testid="roll-input" />
       </form>
     </div>
   )
