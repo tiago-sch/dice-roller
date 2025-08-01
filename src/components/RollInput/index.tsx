@@ -19,10 +19,10 @@ const RollInput = () => {
   return (
     <div className='h-[calc(100vh-64px)] flex justify-end flex-col p-6'>
       <div className="flex flex-1 text-center justify-center items-center">
-        <div>
+        <div className="px-8 max-w-150">
           <p>
             {currentRoll ? (
-              <span className="text-6xl bg-secondary p-4 rounded-lg block font-bold">
+              <span className="text-6xl bg-secondary py-4 px-16 inline-block rounded-lg block font-bold">
                 {currentRoll?.rolled}
               </span>
             ) : (
